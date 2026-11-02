@@ -1,4 +1,4 @@
-// Publish this file at the root of Giupy93/supabase-fcm-helper before deploying
+// Publish this file at the root of Josam-Developer-Company/supabase-fcm-helper before deploying
 // process-inactive-accounts. Keep the account-recovery email style in sync.
 export const escapeHtml = (value: string) =>
   value.replace(

@@ -16,7 +16,7 @@
 
 import * as Sentry from "https://deno.land/x/sentry/index.mjs";
 import type { SupabaseClient } from 'jsr:@supabase/supabase-js@2';
-import { classifyReminderFcmResponse } from 'https://esm.sh/gh/Giupy93/supabase-fcm-helper/reminder_validation.ts';
+import { classifyReminderFcmResponse } from './reminder_validation.ts';
 
 const FCM_ENDPOINT = 'https://fcm.googleapis.com/v1/projects/{projectId}/messages:send';
 const OAUTH_ENDPOINT = 'https://oauth2.googleapis.com/token';
