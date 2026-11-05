@@ -71,6 +71,8 @@ export function renderSuccessionEmail(job: SuccessionMail, appUrl: string) {
       : `${project}: would you like to become the owner?`)
     : archived
     ? (it ? `${project} è stato archiviato` : `${project} has been archived`)
+    : job.kind === "reactivated"
+    ? (it ? `${project} è di nuovo attivo` : `${project} is active again`)
     : (it
       ? `${project} ha un nuovo proprietario`
       : `${project} has a new owner`);
