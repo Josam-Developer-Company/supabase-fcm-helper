@@ -14,7 +14,7 @@ export const escapeHtml = (value: string) =>
     }[c]!),
   );
 
-function inactivityEmailHtml(options: {
+export function inactivityEmailHtml(options: {
   title: string;
   text: string;
   language: string;
