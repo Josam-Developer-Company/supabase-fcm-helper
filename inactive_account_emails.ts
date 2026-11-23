@@ -171,14 +171,14 @@ export function renderInactivityEmail(
             ? "L’ultimo accesso registrato al tuo account risale a oltre 12 mesi fa. Ti chiediamo di aprire il calendario per confermare che desideri mantenere l’account."
             : "Non rileviamo utilizzi del tuo account da almeno 12 mesi.")
           : "Non abbiamo ancora rilevato un nuovo utilizzo del tuo account."
-      } La cancellazione è prevista per il ${date}. Per mantenere l’account, apri Band Calendar e carica il calendario entro questa data. Se sei già autenticato, non devi effettuare nuovamente il login.`
+      } La cancellazione è prevista per il ${date}. Per evitare la cancellazione, entra in Band Calendar con il tuo account entro la data indicata e attendi che compaia il calendario. Se hai già effettuato l’accesso, basta riaprire l’app e visualizzare il calendario. Non serve aggiungere o modificare eventi.`
       : `${
         kind === "warning"
           ? (activitySource === "legacy_sign_in"
             ? "Your last recorded sign-in was over 12 months ago. Please open the calendar to confirm that you want to keep your account."
             : "We have not detected any use of your account for at least 12 months.")
           : "We have not detected any new use of your account yet."
-      } Deletion is scheduled for ${date}. To keep your account, open Band Calendar and load the calendar before this date. If you are already signed in, you do not need to sign in again.`);
+      } Deletion is scheduled for ${date}. To avoid deletion, sign in to Band Calendar with your account before the deadline and wait for the calendar to appear. If you are already signed in, simply reopen the app and view the calendar. You do not need to add or edit any events.`);
   const shared = it
     ? "Il profilo personale e gli accessi ai gruppi vengono rimossi con l’account. Le attività nei calendari condivisi vengono conservate e riassegnate al proprietario del progetto."
     : "Your personal profile and group access are removed with your account. Shared calendar entries are kept and reassigned to the project owner.";

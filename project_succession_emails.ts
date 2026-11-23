@@ -185,12 +185,12 @@ export function renderOwnerInactivityEmail(job: {
         date(job.deleted_at!, it)
       }, after your owned projects had been handled.`)
     : (it
-      ? `Non rileviamo un nuovo utilizzo del tuo account. Per mantenerlo, apri Band Calendar e carica il calendario entro il ${
+      ? `Non rileviamo un nuovo utilizzo del tuo account. Per mantenerlo, entra in Band Calendar con il tuo account entro il ${
         date(job.deadline, it)
-      }. Dopo questa data cercheremo un nuovo proprietario per i tuoi progetti tra i membri idonei. Se nessuno accetta, i progetti verranno archiviati. Il tuo account potrà essere eliminato solo dopo la conclusione della procedura.`
-      : `We have not detected new use of your account. To keep it, open Band Calendar and load your calendar by ${
+      }. Attendi che compaia il calendario. Se hai già effettuato l’accesso, basta riaprire l’app e visualizzare il calendario. Non serve aggiungere o modificare eventi. Dopo questa data cercheremo un nuovo proprietario per i tuoi progetti tra i membri idonei. Se nessuno accetta, i progetti verranno archiviati. Il tuo account potrà essere eliminato solo dopo la conclusione della procedura.`
+      : `We have not detected new use of your account. To keep it, sign in to Band Calendar with your account by ${
         date(job.deadline, it)
-      }. After that date, eligible members will be invited to take ownership of your projects. If nobody accepts, projects will be archived. Your account can only be deleted once that process is complete.`);
+      }. Wait for the calendar to appear. If you are already signed in, simply reopen the app and view the calendar. You do not need to add or edit any events. After that date, eligible members will be invited to take ownership of your projects. If nobody accepts, projects will be archived. Your account can only be deleted once that process is complete.`);
   const outcomes = (job.project_outcomes ?? []).map((p) =>
     `${p.name}: ${
       p.state === "transferred"
