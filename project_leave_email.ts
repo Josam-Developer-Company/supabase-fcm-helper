@@ -1,4 +1,7 @@
-import { inactivityEmailHtml } from "./inactive_account_emails.ts";
+import {
+  emailNavigationUrl,
+  inactivityEmailHtml,
+} from "./inactive_account_emails.ts";
 
 export type ProjectLeaveNotification = {
   owner_email: string;
@@ -19,6 +22,8 @@ export function renderProjectLeaveEmail(
   }
   url.search = "";
   url.hash = "/calendar?" + new URLSearchParams({ project: job.project_id });
+  const navigationUrl = emailNavigationUrl(appUrl, job.project_id);
+  const targetUrl = navigationUrl === appUrl ? url.toString() : navigationUrl;
   const it = job.language !== "en";
   const member = job.member_name.trim() || (it ? "Un membro" : "A member");
   const project = job.project_name.trim() || (it ? "Progetto" : "Project");
@@ -50,7 +55,7 @@ export function renderProjectLeaveEmail(
       text,
       language: job.language,
       notice,
-      action: { url: url.toString(), label },
+      action: { url: targetUrl, label },
       address: { label: it ? "PROGETTO" : "PROJECT", value: project },
     }).replace(
       it ? "SICUREZZA DEL TUO ACCOUNT" : "YOUR ACCOUNT SECURITY",
@@ -60,7 +65,7 @@ export function renderProjectLeaveEmail(
       title,
       text,
       notice,
-      `${label}: ${url}`,
+      `${label}: ${targetUrl}`,
       it
         ? "Buona musica,\nIl team di Band Calendar"
         : "Keep making music,\nThe Band Calendar team",

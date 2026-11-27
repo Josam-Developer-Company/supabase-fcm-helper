@@ -1,3 +1,26 @@
+/** Adapt only known production bases. Legacy/custom URLs keep their behavior. */
+export function emailNavigationUrl(appUrl: string, projectId?: string): string {
+  if (
+    ![
+      "https://app.bandcalendar.eu",
+      "https://app.bandcalendar.eu/",
+      "https://app.bandcalendar.eu/#/calendar",
+    ].includes(appUrl.trim())
+  ) return appUrl;
+  if (
+    projectId !== undefined &&
+    !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      projectId,
+    )
+  ) {
+    throw new Error("Invalid project id");
+  }
+  return "https://app.bandcalendar.eu/email-link/#/" +
+    (projectId === undefined
+      ? "open-calendar"
+      : "open-project?project=" + projectId.toLowerCase());
+}
+
 // Publish this file at the root of Josam-Developer-Company/supabase-fcm-helper before deploying
 // process-inactive-accounts. Keep the account-recovery email style in sync.
 export const escapeHtml = (value: string) =>
@@ -187,9 +210,11 @@ export function renderInactivityEmail(
     : (it
       ? `Aprire questa email o fare clic sul link non è sufficiente: occorre usare l’app con il proprio account. ${shared}`
       : `Opening this email or clicking the link is not enough: you need to use the app with your account. ${shared}`);
-  const action = kind === "deleted"
-    ? undefined
-    : { url: appUrl, label: it ? "Apri Band Calendar" : "Open Band Calendar" };
+  const navigationUrl = emailNavigationUrl(appUrl);
+  const action = kind === "deleted" ? undefined : {
+    url: navigationUrl,
+    label: it ? "Apri Band Calendar" : "Open Band Calendar",
+  };
   return {
     subject,
     htmlContent: inactivityEmailHtml({
@@ -209,7 +234,7 @@ export function renderInactivityEmail(
       title,
       text,
       notice,
-      action ? `${action.label}: ${appUrl}` : "",
+      action ? `${action.label}: ${navigationUrl}` : "",
       it
         ? "Buona musica,\nIl team di Band Calendar"
         : "Keep making music,\nThe Band Calendar team",
